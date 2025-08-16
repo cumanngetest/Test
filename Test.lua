@@ -39,57 +39,31 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local Tab = Window:CreateTab("Clumsy", 4483362458) -- Title, Image
-
-local Tab = Window:CreateTab("Main", "rewind")
-
-local Section = Tab:CreateSection("Section Example")
-
-Section:Set("Section Example")
-
-local Divider = Tab:CreateDivider()
-
-Divider:Set(false) -- Whether the divider's visibility is to be set to true or false.
-
-Rayfield:SetVisibility(false)
-
-Rayfield:IsVisible()
-
-Rayfield:Destroy()
-
-Rayfield:Notify({
-   Title = "Notification Title",
-   Content = "Notification Content",
-   Duration = 6.5,
-   Image = 4483362458,
-})
-
-Rayfield:Notify({
-   Title = "Notification Title",
-   Content = "Notification Content",
-   Duration = 6.5,
-   Image = "rewind",
-})
-
-local Button = Tab:CreateButton({
-   Name = "Button Example",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-Button:Set("Button Example")
-
-local Toggle = Tab:CreateToggle({
-   Name = "Toggle Example",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   -- The function that takes place when the toggle is pressed
-   -- The variable (Value) is a boolean on whether the toggle is true or false
-   end,
-})
-
-Toggle:Set(false)
-
-
+local Tab = Window:CreateTab("Home", nil) -- Title, Image
+local Button = MainTab:CreateButton({
+Name = "Infinite Jump",
+Callback = function()
+--Toggles the infinite jump between on or off on every script run
+_G.infinjump = not _G.infinjump
+            
+if _G.infinJumpStarted == nil then
+--Ensures this only runs once to save resources
+_G.infinJumpStarted = true
+--Notifies readiness
+game.StarterGui:SetCore("SendNotification", {Title="Clumsy Hub"; Text="Infinite Jump Activated!"; Duration=5;})
+--The actual infinite jump
+local plr = game:GetService('Players').LocalPlayer
+local m = plr:GetMouse()
+m.KeyDown:connect(function(k)
+if _G.infinjump then 
+  if k:byte() == 32 then
+humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid' )
+humanoid:ChangeState("Jumping' )
+wait()
+humanoid: ChangeState('Seated')
+end
+                     end
+                     end)
+               end
+            end,
+         })
